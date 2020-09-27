@@ -11,6 +11,9 @@ $(call inherit-product-if-exists, $(SRC_TARGET_DIR)/product/embedded.mk)
 # If you are building from OmniROM's minimal source, Inherit some common Omni stuff.
 $(call inherit-product, vendor/omni/config/common.mk)
 
+# Get non-open-source specific aspects
+$(call inherit-product-if-exists, vendor/Unihertz/Atom_XL/Atom_XL-vendor.mk)
+
 # Fles under $(LOCAL_PATH)/recovery/root/ gets automatically copied into recovery
 # PRODUCT_COPY_FILES += device/Unihertz/Atom_XL/prebuilt/Image.gz:kernel
 # PRODUCT_COPY_FILES += $(LOCAL_PATH)/recovery/root/*:root/*
