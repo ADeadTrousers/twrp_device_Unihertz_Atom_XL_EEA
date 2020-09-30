@@ -86,4 +86,4 @@ First of all we need to get a gzip file of the kernel
 
 	gzip -n -k -9 Image
 
-Next check if the packed size of the new kernel matches the packed size of the old kernel. If it's not matching you need to add a `00`at the end of the unpacked kernel using HXD hex editor and repack again. Do that as long as the sizes don't match.
+Next check if the packed size of the new kernel matches the packed size of the old kernel. If it's not matching you need to add a `00`at the end of the unpacked kernel using HXD hex editor and repack again. Do that as long as the sizes don't match. In fact I had to add quite a lot of `00` but it didn't match at the end. So I ended up adding an additional `00` to packed kernel to get it match. Then add the beginning `Image.gz-beginning` and the ending `Image.gz-ending` and you are good to go.
