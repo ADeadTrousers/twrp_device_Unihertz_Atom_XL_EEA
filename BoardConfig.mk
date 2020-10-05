@@ -17,22 +17,22 @@ TARGET_USERIMAGES_USE_F2FS := true            # To add info about F2FS Filesyste
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432
 # BOARD_USES_FULL_RECOVERY_IMAGE := true      # Uncomment this line if you want to remove size restriction
 BOARD_FLASH_BLOCK_SIZE := 0                   # Might be different for your chip
-BOARD_HAS_NO_REAL_SDCARD := true              # Depricated
+# BOARD_HAS_NO_REAL_SDCARD := true              # Depricated
 # BOARD_HAS_NO_SELECT_BUTTON := true          # Depricated
 BOARD_SUPPRESS_SECURE_ERASE := true
-BOARD_HAS_NO_MISC_PARTITION := true           # Delete if your partition table has /misc
+# BOARD_HAS_NO_MISC_PARTITION := true         # Delete if your partition table has /misc
 BOARD_RECOVERY_SWIPE := true
 BOARD_USES_MMCUTILS := true
 BOARD_SUPPRESS_EMMC_WIPE := true
 BOARD_CHARGER_SHOW_PERCENTAGE := true
-RECOVERY_SDCARD_ON_DATA := true               # Optional: If /sdcard partition is emulated on /data partition 
+# RECOVERY_SDCARD_ON_DATA := true             # Optional: If /sdcard partition is emulated on /data partition 
 
 # TWRP stuff
 TW_EXCLUDE_SUPERSU := true                    # true/false: Add SuperSU or not
 TW_INCLUDE_CRYPTO := true                     # true/false: Add Data Encryption Support or not
 TW_INPUT_BLACKLIST := "hbtp_vm"               # Optional: Disables virtual mouse
 TW_SCREEN_BLANK_ON_BOOT := true
-#TW_THEME := portrait_hdpi                    # Set the exact theme you wanna use. If resulation doesn't match, define the height/width
+# TW_THEME := portrait_hdpi                   # Set the exact theme you wanna use. If resulation doesn't match, define the height/width
 DEVICE_RESOLUTION := 640x1136                 # The Resolution of your Device
 TARGET_SCREEN_HEIGHT := 1136                    # The height
 TARGET_SCREEN_WIDTH := 640                      # The width
@@ -42,7 +42,7 @@ TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_SECONDARY_BRIGHTNESS_PATH := /sys/devices/platform/leds-mt65xx/leds/lcd-backlight/brightness
 # Set the Path of Logical Units (LUNs) for Storage below (as per your chip/device)
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0.auto/gadget/lun%d/file
-#TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun/file
+# TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun/file
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 80                   # Set custom brightness, low is better
 
