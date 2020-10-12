@@ -21,6 +21,9 @@ PRODUCT_BRAND := Unihertz
 PRODUCT_MODEL := Atom_XL
 PRODUCT_MANUFACTURER := Unihertz
 
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.timezone=Europe/Vienna \
+    
 # Forcefully add mtp support (adb is already there)
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp

@@ -20,6 +20,13 @@ The Unihertz Atom XL (codenamed simply _"Atom_XL"_) is a rugged small smartphone
 | Camera (Rear - Main)    | 48MP                                                                                                                           |
 | Camera (Front)          | 8MP                                                                                                                            |
 
+## Documentations
+
+- [HOW-TO-BUILD.md](https://github.com/ADeadTrousers/twrp_device_Unihertz_Atom_XL/blob/master/docs/HOW-TO-BUILD.md) - Building instructions for TWRP.
+- [HOW-TO-INSTALL.md](https://github.com/ADeadTrousers/twrp_device_Unihertz_Atom_XL/blob/master/docs/HOW-TO-INSTALL.md) - Installation instructions for the Atom XL.
+- [HOW-TO-UPDATE.md](https://github.com/ADeadTrousers/twrp_device_Unihertz_Atom_XL/blob/master/docs/HOW-TO-UPDATE.md) - Update instructions for the Atom XL.
+- [HOW-TO-PATCH.md](https://github.com/ADeadTrousers/twrp_device_Unihertz_Atom_XL/blob/master/docs/HOW-TO-PATCH.md) - Patching the prebuilt kernel to activate touchscreen in recovery mode.
+
 ## Special Thanks To
 
 - [PeterCxy from the XDA forum](https://forum.xda-developers.com/member.php?u=5351691) for helping me and providing the device tree for Atom L.
