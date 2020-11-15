@@ -4,7 +4,7 @@ ALLOW_MISSING_DEPENDENCIES := true
 
 TARGET_BOARD_PLATFORM := mt6771               # From ro.mediatek.platform, but lowercase value
 TARGET_NO_BOOTLOADER := true
-TARGET_BOOTLOADER_BOARD_NAME := g63v71c2k_dfl_seea # From ro.product.board
+TARGET_BOOTLOADER_BOARD_NAME := mt6771        # From ro.product.board
 
 # These two are for MTK Chipsets only
 BOARD_USES_MTK_HARDWARE := true
@@ -29,13 +29,12 @@ BOARD_CHARGER_SHOW_PERCENTAGE := true
 
 # TWRP stuff
 TW_EXCLUDE_SUPERSU := true                    # true/false: Add SuperSU or not
-TW_INCLUDE_CRYPTO := true                     # true/false: Add Data Encryption Support or not
 TW_INPUT_BLACKLIST := "hbtp_vm"               # Optional: Disables virtual mouse
 TW_SCREEN_BLANK_ON_BOOT := true
 # TW_THEME := portrait_hdpi                   # Set the exact theme you wanna use. If resulation doesn't match, define the height/width
 DEVICE_RESOLUTION := 640x1136                 # The Resolution of your Device
-TARGET_SCREEN_HEIGHT := 1136                    # The height
-TARGET_SCREEN_WIDTH := 640                      # The width
+TARGET_SCREEN_HEIGHT := 1136                  # The height
+TARGET_SCREEN_WIDTH := 640                    # The width
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 # Set the Brightness Control File Path below (as per your chip/device)
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
@@ -50,12 +49,24 @@ TW_EXCLUDE_TWRPAPP := true
 TW_INCLUDE_NTFS_3G := true                    # Include NTFS Filesystem Support
 TW_INCLUDE_FUSE_EXFAT := true                 # Include Fuse-ExFAT Filesystem Support
 TWRP_INCLUDE_LOGCAT := true                   # Include LogCat Binary
+TARGET_USES_LOGD := true
 TW_INCLUDE_FB2PNG := true                     # Include Screenshot Support
 TW_DEFAULT_LANGUAGE := en                     # Set Default Language 
 TW_EXTRA_LANGUAGES := false
 
+# Crypto
+TW_INCLUDE_CRYPTO := true
+TW_CRYPTO_FS_TYPE := "ext4"
+TW_CRYPTO_REAL_BLKDEV := "/dev/block/platform/bootdevice/by-name/userdata"
+TW_CRYPTO_MNT_POINT := "/data"
+TW_CRYPTO_FS_OPTIONS := "nosuid,nodev,noatime,discard,noauto_da_alloc,data=ordered"
+
+# Workaround for error copying vendor files to recovery ramdisk
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_VENDOR := vendor
+
 # Kernel
-BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=user androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=$(TARGET_BUILD_VARIANT) androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x40078000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_OFFSET := 0x00008000
@@ -80,7 +91,7 @@ BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 # Set FSTAB
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/root/etc/recovery.fstab
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/twrp.fstab
 
 TARGET_BOARD_SUFFIX := _64                    # Remove if the device is 32-bit
 TARGET_USES_64_BIT_BINDER := true             # Remove if the device is 32-bit

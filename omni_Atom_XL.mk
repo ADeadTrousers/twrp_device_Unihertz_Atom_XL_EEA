@@ -23,6 +23,9 @@ PRODUCT_MANUFACTURER := Unihertz
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.timezone=Europe/Vienna \
+    ro.treble.enabled=true \
+    ro.secure=1 \
+    ro.adb.secure=0
     
 # Forcefully add mtp support (adb is already there)
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
