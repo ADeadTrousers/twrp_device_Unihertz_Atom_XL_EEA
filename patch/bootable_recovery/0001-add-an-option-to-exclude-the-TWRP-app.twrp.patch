@@ -1,13 +1,14 @@
-From e3a4983b0dcb98f11e0c33b0f731b29c57a06a8a Mon Sep 17 00:00:00 2001
+From e7929c6cd966fd74e8267f28eb54312d8c2eb3de Mon Sep 17 00:00:00 2001
 From: nailyk-fr <nailyk_git@nailyk.fr>
 Date: Tue, 08 Aug 2017 21:23:35 +0200
-Subject: [PATCH] TWRP: add an option to exclude the TWRP app
+Subject: [PATCH] twrpapp: automatically exclude on AB devices
 
- * Allow device maintainer to exclude the twrp app and disable
-   the installation prompt. Mostly the app is useless for
-   every unofficially supported devices.
+The TWRP app does not currently support AB devices.
 
- * BoardConfig flag: 'TW_EXCLUDE_TWRPAPP := true'
+ * If AB_OTA_UPDATER := true, then exclude TWRP app
+
+ * To manually exclude TWRP app for non-AB devices,
+   use BoardConfig flag: 'TW_EXCLUDE_TWRPAPP := true'
 
 Original commit: https://gerrit.omnirom.org/#/c/android_bootable_recovery/+/27694/
 
@@ -15,10 +16,18 @@ Change-Id: I0aa1fb2ebe03ceb19c766178544039a82497cdd4
 ---
 
 diff --git a/Android.mk b/Android.mk
-index a750252..c5a33c1 100755
+index 2725a0b..53897b0 100755
 --- a/Android.mk
 +++ b/Android.mk
-@@ -446,6 +446,9 @@
+@@ -199,6 +199,7 @@
+     LOCAL_CFLAGS += -DAB_OTA_UPDATER=1
+     LOCAL_SHARED_LIBRARIES += libhardware android.hardware.boot@1.0
+     TWRP_REQUIRED_MODULES += libhardware
++    TW_EXCLUDE_TWRPAPP := true
+ endif
+ 
+ LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
+@@ -425,6 +426,9 @@
          LOCAL_CFLAGS += -DTW_INCLUDE_LIBRESETPROP
      endif
  endif
@@ -27,12 +36,12 @@ index a750252..c5a33c1 100755
 +endif
  
  TWRP_REQUIRED_MODULES += \
-     relink \
+     dump_image \
 diff --git a/data.cpp b/data.cpp
-index d107795..25a5867 100755
+index e6f1ac0..bc3aff9 100755
 --- a/data.cpp
 +++ b/data.cpp
-@@ -956,10 +956,14 @@
+@@ -904,10 +904,14 @@
  	mConst.SetValue("tw_app_installed_in_system", "0");
  #else
  	mConst.SetValue("tw_oem_build", "0");
@@ -48,10 +57,10 @@ index d107795..25a5867 100755
  
  	mData.SetValue("tw_enable_adb_backup", "0");
 diff --git a/gui/theme/common/landscape.xml b/gui/theme/common/landscape.xml
-index 67c8f91..7a1718f 100755
+index daee7f3..36a8b70 100755
 --- a/gui/theme/common/landscape.xml
 +++ b/gui/theme/common/landscape.xml
-@@ -2942,6 +2942,7 @@
+@@ -3015,6 +3015,7 @@
  					<data variable="tw_military_time"/>
  				</listitem>
  				<listitem name="{@reboot_install_app_prompt_install=Prompt to install TWRP app on every reboot}">
@@ -60,10 +69,10 @@ index 67c8f91..7a1718f 100755
  				</listitem>
  				<listitem name="{@simact_chk=Simulate actions for theme testing}">
 diff --git a/gui/theme/common/portrait.xml b/gui/theme/common/portrait.xml
-index 31aef46..fdb0dc4 100755
+index bead7e6..86eb780 100755
 --- a/gui/theme/common/portrait.xml
 +++ b/gui/theme/common/portrait.xml
-@@ -3154,6 +3154,7 @@
+@@ -3227,6 +3227,7 @@
  					<data variable="tw_samsung_navbar"/>
  				</listitem>
  				<listitem name="{@reboot_install_app_prompt_install=Prompt to install TWRP app on every reboot}">
@@ -72,10 +81,10 @@ index 31aef46..fdb0dc4 100755
  				</listitem>
  				<listitem name="{@simact_chk=Simulate actions for theme testing}">
 diff --git a/gui/theme/common/watch.xml b/gui/theme/common/watch.xml
-index 5312cf5..83da7fc 100755
+index 7421203..ee58e70 100755
 --- a/gui/theme/common/watch.xml
 +++ b/gui/theme/common/watch.xml
-@@ -3644,6 +3644,7 @@
+@@ -3717,6 +3717,7 @@
  					<data variable="tw_military_time"/>
  				</listitem>
  				<listitem name="{@reboot_install_app_prompt_install=Prompt to install TWRP app on every reboot}">
@@ -84,21 +93,30 @@ index 5312cf5..83da7fc 100755
  				</listitem>
  				<listitem name="{@simact_chk=Simulate actions for theme testing}">
 diff --git a/prebuilt/Android.mk b/prebuilt/Android.mk
-index b81c32b..37afa43 100755
+index a4f6f2e..9f6f165 100644
 --- a/prebuilt/Android.mk
 +++ b/prebuilt/Android.mk
-@@ -687,6 +687,7 @@
-    include $(BUILD_PREBUILT)
+@@ -562,14 +562,16 @@
+     include $(BUILD_PREBUILT)
  endif
  
+-#TWRP App "placeholder"
+-include $(CLEAR_VARS)
+-LOCAL_MODULE := me.twrp.twrpapp.apk
+-LOCAL_MODULE_TAGS := eng
+-LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
+-LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
+-LOCAL_SRC_FILES := $(LOCAL_MODULE)
+-include $(BUILD_PREBUILT)
 +ifneq ($(TW_EXCLUDE_TWRPAPP),true)
- #TWRP App "placeholder"
- include $(CLEAR_VARS)
- LOCAL_MODULE := me.twrp.twrpapp.apk
-@@ -695,6 +696,7 @@
- LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
- LOCAL_SRC_FILES := $(LOCAL_MODULE)
- include $(BUILD_PREBUILT)
++	#TWRP App "placeholder"
++	include $(CLEAR_VARS)
++	LOCAL_MODULE := me.twrp.twrpapp.apk
++	LOCAL_MODULE_TAGS := eng
++	LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
++	LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
++	LOCAL_SRC_FILES := $(LOCAL_MODULE)
++	include $(BUILD_PREBUILT)
 +endif
  
  #TWRP App permissions for Android 9+
