@@ -27,11 +27,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.secure=1 \
     ro.adb.secure=0
     
-# Forcefully add mtp support (adb is already there)
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
-
 # Add fingerprint from Stock ROM build.prop
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BUILD_FINGERPRINT="Unihertz/Atom_XL_EEA/Atom_XL:10/QP1A.190711.020/root.20200312.183343:user/release-keys" \
-    PRIVATE_BUILD_DESC="Atom_XL_EEA-user 10 QP1A.190711.020 root.20200312.183343 release-keys"
+    BUILD_FINGERPRINT="Unihertz/Atom_XL_EEA/Atom_XL:10/QP1A.190711.020/root.20200923.160250:user/release-keys" \
+    PRIVATE_BUILD_DESC="Atom_XL_EEA-user 10 QP1A.190711.020 root.20200923.160250 release-keys"

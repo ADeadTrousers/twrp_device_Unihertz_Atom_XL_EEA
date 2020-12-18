@@ -51,6 +51,7 @@ TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 80                   # Set custom brightness, low is better
 
 TW_EXCLUDE_TWRPAPP := true
+TW_NO_HAPTICS := true
 TW_INCLUDE_NTFS_3G := true                    # Include NTFS Filesystem Support
 TW_INCLUDE_FUSE_EXFAT := true                 # Include Fuse-ExFAT Filesystem Support
 TWRP_INCLUDE_LOGCAT := true                   # Include LogCat Binary
@@ -58,6 +59,10 @@ TARGET_USES_LOGD := true
 TW_INCLUDE_FB2PNG := true                     # Include Screenshot Support
 TW_DEFAULT_LANGUAGE := en                     # Set Default Language 
 TW_EXTRA_LANGUAGES := false
+TW_INTERNAL_STORAGE_PATH := "/data/media"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
