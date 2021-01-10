@@ -1,7 +1,7 @@
 # Settings taken from "defvs/android_device_umidigi_f2" and "redispade/device_xiaomi_grus-twrp"
 /boot_para              emmc        /dev/block/platform/bootdevice/by-name/boot_para
 /recovery               emmc        /dev/block/platform/bootdevice/by-name/recovery         flags=display="Recovery";backup=1;flashimg=1
-/misc                   emmc        /dev/block/platform/bootdevice/by-name/para             flags=display="Parametr";backup=1        
+/misc                   emmc        /dev/block/platform/bootdevice/by-name/para             flags=display="Parameter";backup=1        
 /expdb                  emmc        /dev/block/platform/bootdevice/by-name/expdb
 /persistent             emmc        /dev/block/platform/bootdevice/by-name/frp              flags=display="Frp";backup=1
 /metadata               ext4        /dev/block/platform/bootdevice/by-name/md_udc
@@ -29,15 +29,16 @@
 /cache                  ext4        /dev/block/platform/bootdevice/by-name/cache            flags=wipeingui;wipeduringfactoryreset
 /data                   ext4        /dev/block/platform/bootdevice/by-name/userdata         flags=encryptable=/dev/block/platform/bootdevice/by-name/md_udc
 /external_sd            auto        /dev/block/mmcblk0p1    /dev/block/mmcblk0              flags=display="External SDcard";storage;wipeingui;removable;backup=0
-/usbotg                 auto        /dev/block/sda1         /dev/block/sda                  flags=display="Usb-Otg";storage;removable;backup=0
+/usbotg                 auto        /dev/block/sda1         /dev/block/sda                  flags=display="Usb-Otg";storage;removable;wipeingui;backup=0
 # Settings taken from "redispade/device_xiaomi_grus-twrp"
 /dtbo                   emmc        /dev/block/platform/bootdevice/by-name/dtbo             flags=backup=1;display="DTB Overlays";flashimg=1;subpartitionof=/boot
+# Settings taken from " PitchBlackRecoveryProject/android_device_oppo_CPH1861-pbrp"
 /persist                ext4        /dev/block/platform/bootdevice/by-name/persist          flags=display="Persist"
-/persist_image          emmc        /dev/block/platform/bootdevice/by-name/persist          flags=display="Persist Image";backup=1;flashimg=1
-/system_root            ext4        /dev/block/bootdevice/by-name/system                    flags=display="System";backup=0
-/system_image           emmc        /dev/block/bootdevice/by-name/system                    flags=flashimg;backup=1;display="System Image"
-/vendor                 ext4        /dev/block/bootdevice/by-name/vendor                    flags=backup=0;display="Vendor";wipeingui
-/vendor_image           emmc        /dev/block/bootdevice/by-name/vendor                    flags=flashimg;backup=1;display="Vendor Image"
+/persist_image          emmc        /dev/block/platform/bootdevice/by-name/persist          flags=display="Persist Image";backup=1
+/system_root            ext4        /dev/block/platform/bootdevice/by-name/system           flags=display="System";wipeingui;backup=0
+/system_image           emmc        /dev/block/by-name/system                               flags=display="System Image";flashimg=1;backup=1
+/vendor                 ext4        /dev/block/platform/bootdevice/by-name/vendor           flags=display="Vendor";wipeingui;backup=0;
+/vendor_image           emmc        /dev/block/by-name/vendor                               flags=display="Vendor Image";flashimg=1;backup=1;
 # Settings applied the same way as "persists" because of the same original mount point in "/mnt/vendor/*"
 /apd                    ext4        /dev/block/platform/bootdevice/by-name/apd              flags=display="Apd"
 /apd_image              emmc        /dev/block/platform/bootdevice/by-name/apd              flags=display="Apd Image";backup=1;flashimg=1
