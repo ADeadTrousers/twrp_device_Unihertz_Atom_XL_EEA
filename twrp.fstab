@@ -1,3 +1,7 @@
+system /system ext4 ro wait,logical,first_stage_mount
+vendor /vendor ext4 ro wait,logical,first_stage_mount
+product /product ext4 ro wait,logical,first_stage_mount
+
 # Settings taken from "defvs/android_device_umidigi_f2" and "redispade/device_xiaomi_grus-twrp"
 /boot_para              emmc        /dev/block/platform/bootdevice/by-name/boot_para
 /recovery               emmc        /dev/block/platform/bootdevice/by-name/recovery         flags=display="Recovery";backup=1;flashimg=1
@@ -34,14 +38,8 @@
 /dtbo                   emmc        /dev/block/platform/bootdevice/by-name/dtbo             flags=backup=1;display="DTB Overlays";flashimg=1;subpartitionof=/boot
 # Settings taken from " PitchBlackRecoveryProject/android_device_oppo_CPH1861-pbrp"
 /persist                ext4        /dev/block/platform/bootdevice/by-name/persist          flags=display="Persist"
-/persist_image          emmc        /dev/block/platform/bootdevice/by-name/persist          flags=display="Persist Image";backup=1
-/system_root            ext4        /dev/block/platform/bootdevice/by-name/system           flags=display="System";wipeingui;backup=0
-/system_image           emmc        /dev/block/by-name/system                               flags=display="System Image";flashimg=1;backup=1
-/vendor                 ext4        /dev/block/platform/bootdevice/by-name/vendor           flags=display="Vendor";wipeingui;backup=0;
-/vendor_image           emmc        /dev/block/by-name/vendor                               flags=display="Vendor Image";flashimg=1;backup=1;
 # Settings applied the same way as "persists" because of the same original mount point in "/mnt/vendor/*"
 /apd                    ext4        /dev/block/platform/bootdevice/by-name/apd              flags=display="Apd"
-/apd_image              emmc        /dev/block/platform/bootdevice/by-name/apd              flags=display="Apd Image";backup=1;flashimg=1
 # Settings for "/vbmeta" taken from "mauronofrio/android_device_realme_RMX1851" and consequently applied to "/vbmeta_vendor" and "/vbmeta_system" 
 /vbmeta                 emmc        /dev/block/platform/bootdevice/by-name/vbmeta           flags=display="Vbmeta";flashimg=1;backup=1
 /vbmeta_vendor          emmc        /dev/block/platform/bootdevice/by-name/vbmeta_vendor    flags=display="Vbmeta vendor";flashimg=1;backup=1
