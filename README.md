@@ -1,7 +1,5 @@
 Device configuration for Unihertz Atom XL (Atom_XL)
 =================================================
-:warning: THIS DEVICE TREE IS NOT PRODUCTION READY :warning: 
-
 This device tree is intended for a special useage in a TWRP or similar environment.
 If you are looking for a device tree for the usage in a LineageOS or similar environment head over to https://github.com/ADeadTrousers/android_device_Unihertz_Atom_XL.
 
