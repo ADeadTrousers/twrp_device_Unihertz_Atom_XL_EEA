@@ -24,8 +24,11 @@ PRODUCT_MANUFACTURER := Unihertz
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.timezone=Europe/Vienna \
     ro.treble.enabled=true \
-    ro.secure=1 \
-    ro.adb.secure=0
+    ro.secure=0 \
+    ro.adb.secure=0 \
+    ro.debuggable=1 \
+    persist.sys.usb.config=adb,mtp \
+    sys.usb.config=adb,mtp
     
 # Add fingerprint from Stock ROM build.prop
 PRODUCT_BUILD_PROP_OVERRIDES += \
