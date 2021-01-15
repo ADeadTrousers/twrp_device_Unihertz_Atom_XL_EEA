@@ -1,8 +1,9 @@
+# Logical partitions
 system /system ext4 ro wait,logical,first_stage_mount
 vendor /vendor ext4 ro wait,logical,first_stage_mount
 product /product ext4 ro wait,logical,first_stage_mount
 
-# Settings taken from "defvs/android_device_umidigi_f2" and "redispade/device_xiaomi_grus-twrp"
+# Physical partitions
 /boot_para              emmc        /dev/block/platform/bootdevice/by-name/boot_para
 /recovery               emmc        /dev/block/platform/bootdevice/by-name/recovery         flags=display="Recovery";backup=1;flashimg=1
 /misc                   emmc        /dev/block/platform/bootdevice/by-name/para             flags=display="Parameter";backup=1        
@@ -31,16 +32,13 @@ product /product ext4 ro wait,logical,first_stage_mount
 /tee1                   emmc        /dev/block/platform/bootdevice/by-name/tee1             flags=display="Tee";backup=1;flashimg=1
 /tee2                   emmc        /dev/block/platform/bootdevice/by-name/tee2             flags=backup=1;subpartitionof=/tee1
 /cache                  ext4        /dev/block/platform/bootdevice/by-name/cache            flags=wipeingui;wipeduringfactoryreset
-/data                   ext4        /dev/block/platform/bootdevice/by-name/userdata         flags=encryptable=/dev/block/platform/bootdevice/by-name/md_udc
+/data                   ext4        /dev/block/platform/bootdevice/by-name/userdata         flags=fileencryption=aes-256-xts
 /external_sd            auto        /dev/block/mmcblk0p1    /dev/block/mmcblk0              flags=display="External SDcard";storage;wipeingui;removable;backup=0
 /usbotg                 auto        /dev/block/sda1         /dev/block/sda                  flags=display="Usb-Otg";storage;removable;wipeingui;backup=0
-# Settings taken from "redispade/device_xiaomi_grus-twrp"
 /dtbo                   emmc        /dev/block/platform/bootdevice/by-name/dtbo             flags=backup=1;display="DTB Overlays";flashimg=1;subpartitionof=/boot
-# Settings taken from " PitchBlackRecoveryProject/android_device_oppo_CPH1861-pbrp"
 /persist                ext4        /dev/block/platform/bootdevice/by-name/persist          flags=display="Persist"
-# Settings applied the same way as "persists" because of the same original mount point in "/mnt/vendor/*"
+/persist_image          emmc        /dev/block/platform/bootdevice/by-name/persist          flags=display="Persist Image";backup=1;flashimg=1
 /apd                    ext4        /dev/block/platform/bootdevice/by-name/apd              flags=display="Apd"
-# Settings for "/vbmeta" taken from "mauronofrio/android_device_realme_RMX1851" and consequently applied to "/vbmeta_vendor" and "/vbmeta_system" 
 /vbmeta                 emmc        /dev/block/platform/bootdevice/by-name/vbmeta           flags=display="Vbmeta";flashimg=1;backup=1
 /vbmeta_vendor          emmc        /dev/block/platform/bootdevice/by-name/vbmeta_vendor    flags=display="Vbmeta vendor";flashimg=1;backup=1
 /vbmeta_system          emmc        /dev/block/platform/bootdevice/by-name/vbmeta_system    flags=display="Vbmeta system";flashimg=1;backup=1

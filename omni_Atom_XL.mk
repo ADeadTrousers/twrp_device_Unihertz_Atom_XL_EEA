@@ -22,7 +22,6 @@ PRODUCT_MODEL := Atom_XL
 PRODUCT_MANUFACTURER := Unihertz
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.timezone=Europe/Vienna \
     ro.treble.enabled=true \
     ro.secure=0 \
     ro.adb.secure=0 \

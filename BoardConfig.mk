@@ -33,7 +33,7 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true            # To add info about F2FS Filesystem Data Block
 
 # TWRP stuff
-TW_EXCLUDE_SUPERSU := false                   # true/false: Add SuperSU or not
+TW_EXCLUDE_SUPERSU := true                    # true/false: Add SuperSU or not
 TW_INPUT_BLACKLIST := "hbtp_vm"               # Optional: Disables virtual mouse
 TW_SCREEN_BLANK_ON_BOOT := true
 # TW_THEME := portrait_hdpi                   # Set the exact theme you wanna use. If resulation doesn't match, define the height/width
@@ -51,7 +51,7 @@ TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 80                   # Set custom brightness, low is better
 
 TW_EXCLUDE_TWRPAPP := true
-TW_NO_HAPTICS := true
+TW_HAS_DOWNLOAD_MODE := false
 TW_INCLUDE_NTFS_3G := true                    # Include NTFS Filesystem Support
 TW_INCLUDE_FUSE_EXFAT := true                 # Include Fuse-ExFAT Filesystem Support
 TWRP_INCLUDE_LOGCAT := true                   # Include LogCat Binary
@@ -59,26 +59,21 @@ TARGET_USES_LOGD := true
 TW_INCLUDE_FB2PNG := true                     # Include Screenshot Support
 TW_DEFAULT_LANGUAGE := en                     # Set Default Language 
 TW_EXTRA_LANGUAGES := false
-TW_INTERNAL_STORAGE_PATH := "/data/media/0"
-TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
-TW_EXTERNAL_STORAGE_PATH := "/external_sd"
-TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
-TW_CRYPTO_FS_TYPE := "ext4"
-TW_CRYPTO_REAL_BLKDEV := "/dev/block/platform/bootdevice/by-name/userdata"
-TW_CRYPTO_MNT_POINT := "/data"
-TW_CRYPTO_FS_OPTIONS := "nosuid,nodev,noatime,discard,noauto_da_alloc,data=ordered"
+TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+BOARD_USES_METADATA_PARTITION := true
 
 # Workaround for error copying vendor files to recovery ramdisk
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR := vendor
-BUILD_WITHOUT_VENDOR := true
-BOARD_ROOT_EXTRA_FOLDERS += metadata
+BOARD_ROOT_EXTRA_FOLDERS += metadata persist
 
 # Kernel
-BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=$(TARGET_BUILD_VARIANT) androidboot.selinux=enforcing
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=$(TARGET_BUILD_VARIANT) androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x40078000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_OFFSET := 0x00008000
@@ -101,9 +96,6 @@ BOARD_MKBOOTIMG_ARGS += --kernel_offset $(BOARD_KERNEL_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --second_offset $(BOARD_KERNEL_SECOND_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
-
-# Set FSTAB
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/twrp.fstab
 
 TARGET_BOARD_SUFFIX := _64                    # Remove if the device is 32-bit
 TARGET_USES_64_BIT_BINDER := true             # Remove if the device is 32-bit
