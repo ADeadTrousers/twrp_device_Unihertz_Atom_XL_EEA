@@ -21,14 +21,6 @@ PRODUCT_BRAND := Unihertz
 PRODUCT_MODEL := Atom_XL
 PRODUCT_MANUFACTURER := Unihertz
 
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.treble.enabled=true \
-    ro.secure=0 \
-    ro.adb.secure=0 \
-    ro.debuggable=1 \
-    persist.sys.usb.config=adb,mtp \
-    sys.usb.config=adb,mtp
-    
 # Add fingerprint from Stock ROM build.prop
 PRODUCT_BUILD_PROP_OVERRIDES += \
     BUILD_FINGERPRINT="Unihertz/Atom_XL_EEA/Atom_XL:10/QP1A.190711.020/root.20200923.160250:user/release-keys" \
