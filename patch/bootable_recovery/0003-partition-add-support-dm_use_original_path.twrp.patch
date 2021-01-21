@@ -1,0 +1,82 @@
+From 67d178ebc2c97b2bc261814d08016853a2b30bfa Mon Sep 17 00:00:00 2001
+From: Peter Cai <peter@typeblog.net>
+Date: Sat, 02 Nov 2019 19:22:38 +0800
+Subject: [PATCH] partition: add support dm_use_original_path
+
+* On some strange devices we must use the symlinked path instead of the
+  real block device
+
+Change-Id: Ib48d745fd442c590aea2baf6d2dbe20aaaef9eec
+---
+
+diff --git a/partition.cpp b/partition.cpp
+index 7755b46..d3dfba0 100755
+--- a/partition.cpp
++++ b/partition.cpp
+@@ -161,6 +161,7 @@
+ 	TWFLAG_KEYDIRECTORY,
+ 	TWFLAG_WRAPPEDKEY,
+ 	TWFLAG_ADOPTED_MOUNT_DELAY,
++	TWFLAG_DM_USE_ORIGINAL_PATH,
+ };
+ 
+ /* Flags without a trailing '=' are considered dual format flags and can be
+@@ -206,6 +207,7 @@
+ 	{ "keydirectory=",          TWFLAG_KEYDIRECTORY },
+ 	{ "wrappedkey",             TWFLAG_WRAPPEDKEY },
+ 	{ "adopted_mount_delay=",   TWFLAG_ADOPTED_MOUNT_DELAY },
++	{ "dm_use_original_path",   TWFLAG_DM_USE_ORIGINAL_PATH },
+ 	{ 0,                        0 },
+ };
+ 
+@@ -271,6 +273,8 @@
+ 	Key_Directory = "";
+ 	Is_Super = false;
+ 	Adopted_Mount_Delay = 0;
++	Original_Path = "";
++	Use_Original_Path = false;
+ }
+ 
+ TWPartition::~TWPartition(void) {
+@@ -670,7 +674,7 @@
+ 	} else if (!Mount(false)) {
+ 		if (Is_Present) {
+ 			if (Key_Directory.empty()) {
+-				set_partition_data(Actual_Block_Device.c_str(), Crypto_Key_Location.c_str(),
++				set_partition_data(Use_Original_Path ? Original_Path.c_str() : Actual_Block_Device.c_str(), Crypto_Key_Location.c_str(),
+ 				Fstab_File_System.c_str());
+ 				if (cryptfs_check_footer() == 0) {
+ 					Is_Encrypted = true;
+@@ -1015,6 +1019,9 @@
+ 		case TWFLAG_KEYDIRECTORY:
+ 			Key_Directory = str;
+ 			break;
++		case TWFLAG_DM_USE_ORIGINAL_PATH:
++			Use_Original_Path = true;
++			break;
+ 		default:
+ 			// Should not get here
+ 			LOGINFO("Flag identified for processing, but later unmatched: %i\n", flag);
+@@ -1227,6 +1234,8 @@
+ void TWPartition::Find_Real_Block_Device(string& Block, bool Display_Error) {
+ 	char device[PATH_MAX], realDevice[PATH_MAX];
+ 
++	Original_Path = Block;
++
+ 	strcpy(device, Block.c_str());
+ 	memset(realDevice, 0, sizeof(realDevice));
+ 	while (readlink(device, realDevice, sizeof(realDevice)) > 0)
+diff --git a/partitions.hpp b/partitions.hpp
+index 49ebf60..ef70f37 100755
+--- a/partitions.hpp
++++ b/partitions.hpp
+@@ -279,6 +279,9 @@
+ 	TWExclude backup_exclusions;                                              // Exclusions for file based backups
+ 	TWExclude wipe_exclusions;                                                // Exclusions for file based wipes (data/media devices only)
+ 	string Key_Directory;                                                     // Metadata key directory needed for mounting FBE encrypted data partitions using metadata encryption
++	string Original_Path;
++	bool Use_Original_Path;
++
+ 	struct partition_fs_flags_struct {                                        // This struct is used to store mount flags and options for different file systems for the same partition
+ 		string File_System;
+ 		int Mount_Flags;
