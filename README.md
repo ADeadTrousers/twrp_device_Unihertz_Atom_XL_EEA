@@ -5,6 +5,8 @@ If you are looking for a device tree for the usage in a LineageOS or similar env
 
 The Unihertz Atom XL (codenamed simply _"Atom_XL"_) is a rugged small smartphone from Unihertz, released in July 2020. It is similar to the Atom L but with integrated amateur radio support.
 
+![](docs/images/atom_xl.png)
+
 | Basic                   | Spec Sheet                                                                                                                     |
 | -----------------------:|:------------------------------------------------------------------------------------------------------------------------------ |
 | CPU                     | Octa-core                                                                                                                      |
@@ -20,10 +22,10 @@ The Unihertz Atom XL (codenamed simply _"Atom_XL"_) is a rugged small smartphone
 
 ## Documentations
 
-- [HOW-TO-BUILD.md](https://github.com/ADeadTrousers/twrp_device_Unihertz_Atom_XL/blob/master/docs/HOW-TO-BUILD.md) - Building instructions for TWRP.
-- [HOW-TO-INSTALL.md](https://github.com/ADeadTrousers/twrp_device_Unihertz_Atom_XL/blob/master/docs/HOW-TO-INSTALL.md) - Installation instructions for the Atom XL.
-- [HOW-TO-UPDATE.md](https://github.com/ADeadTrousers/twrp_device_Unihertz_Atom_XL/blob/master/docs/HOW-TO-UPDATE.md) - Update instructions for the Atom XL.
-- [HOW-TO-PATCH.md](https://github.com/ADeadTrousers/twrp_device_Unihertz_Atom_XL/blob/master/docs/HOW-TO-PATCH.md) - Patching the prebuilt kernel to activate touchscreen in recovery mode.
+- [HOW-TO-BUILD.md](docs/HOW-TO-BUILD.md) - Building instructions for TWRP.
+- [HOW-TO-INSTALL.md](docs/HOW-TO-INSTALL.md) - Installation instructions for the Atom XL.
+- [HOW-TO-UPDATE.md](docs/HOW-TO-UPDATE.md) - Update instructions for the Atom XL.
+- [HOW-TO-PATCH.md](docs/HOW-TO-PATCH.md) - Patching the prebuilt kernel to activate touchscreen in recovery mode.
 
 ## Special Thanks To
 
