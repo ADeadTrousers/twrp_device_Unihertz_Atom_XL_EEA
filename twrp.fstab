@@ -32,7 +32,7 @@ product /product ext4 ro wait,logical,first_stage_mount
 /tee1                   emmc        /dev/block/platform/bootdevice/by-name/tee1             flags=display="Tee";backup=1;flashimg=1
 /tee2                   emmc        /dev/block/platform/bootdevice/by-name/tee2             flags=backup=1;subpartitionof=/tee1
 /cache                  ext4        /dev/block/platform/bootdevice/by-name/cache            flags=wipeingui;wipeduringfactoryreset
-/data                   ext4        /dev/block/platform/bootdevice/by-name/userdata         flags=encryptable=/dev/block/platform/bootdevice/by-name/md_udc
+#/data                   ext4        /dummydevice                                            flags=altdevice=/dev/block/platform/bootdevice/by-name/userdata;encryptable=/dev/block/platform/bootdevice/by-name/md_udc
 /external_sd            auto        /dev/block/mmcblk0p1    /dev/block/mmcblk0              flags=display="External SDcard";storage;wipeingui;removable;backup=0
 /usbotg                 auto        /dev/block/sda1         /dev/block/sda                  flags=display="Usb-Otg";storage;removable;wipeingui;backup=0
 /dtbo                   emmc        /dev/block/platform/bootdevice/by-name/dtbo             flags=backup=1;display="DTB Overlays";flashimg=1;subpartitionof=/boot

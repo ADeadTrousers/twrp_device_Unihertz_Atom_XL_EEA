@@ -34,10 +34,9 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true            # To add info about F2FS Filesystem Data Block
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 TARGET_RECOVERY_INITRC := $(LOCAL_PATH)/recovery/root/init.recovery.mt6771.rc
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/fstab.mt6771
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/twrp.fstab
 
 # TWRP stuff
-TW_EXCLUDE_SUPERSU := true                    # true/false: Add SuperSU or not
 TW_INPUT_BLACKLIST := "hbtp_vm"               # Optional: Disables virtual mouse
 TW_SCREEN_BLANK_ON_BOOT := true
 # TW_THEME := portrait_hdpi                   # Set the exact theme you wanna use. If resulation doesn't match, define the height/width
@@ -72,6 +71,7 @@ TW_HAS_MTP := true
 TW_INCLUDE_REPACKTOOLS := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_DEFAULT_EXTERNAL_STORAGE := true
+TW_NO_USB_STORAGE := true
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
