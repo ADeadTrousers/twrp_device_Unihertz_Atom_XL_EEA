@@ -45,13 +45,14 @@ on property:vendor.trustkernel.log.state=ready
 	restorecon /data/vendor/t6/tkcore.log
 	setprop vendor.trustkernel.log.state enable
 
-service teed /vendor/bin/teed \
+service teed /sbin/teed \
     --datapath /data/vendor/t6/fs \
     --sptapath /data/vendor/t6/app \
     --systapath /vendor/app/t6 \
     --prot /mnt/vendor/persist/t6 \
     --logpath /data/vendor/t6/tkcore.log \
     --proprefix vendor.trustkernel
-	user system
-	group system
+	user root
+	group root
 	class core
+    seclabel u:r:recovery:s0

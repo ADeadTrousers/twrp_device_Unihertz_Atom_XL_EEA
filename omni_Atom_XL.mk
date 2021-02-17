@@ -1,6 +1,9 @@
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+   
+# Inherit from Atom_XL device
+$(call inherit-product, device/Unihertz/Atom_XL/device.mk)
 
 # Another common config inclusion
 $(call inherit-product-if-exists, $(SRC_TARGET_DIR)/product/embedded.mk)
@@ -11,7 +14,7 @@ $(call inherit-product, vendor/omni/config/common.mk)
 # Get non-open-source specific aspects
 $(call inherit-product-if-exists, vendor/Unihertz/Atom_XL/Atom_XL-vendor.mk)
 
-# Fles under $(LOCAL_PATH)/recovery/root/ gets automatically copied into recovery
+# Files under $(LOCAL_PATH)/recovery/root/ get automatically copied into recovery
 # PRODUCT_COPY_FILES += device/Unihertz/Atom_XL/prebuilt/Image.gz:kernel
 # PRODUCT_COPY_FILES += $(LOCAL_PATH)/recovery/root/*:root/*
 

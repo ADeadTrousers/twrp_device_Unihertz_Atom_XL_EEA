@@ -60,16 +60,15 @@ TW_HAS_DOWNLOAD_MODE := false
 TW_INCLUDE_NTFS_3G := true                    # Include NTFS Filesystem Support
 TW_INCLUDE_FUSE_EXFAT := true                 # Include Fuse-ExFAT Filesystem Support
 TWRP_INCLUDE_LOGCAT := true                   # Include LogCat Binary
-TARGET_USES_LOGD := true
 TW_INCLUDE_FB2PNG := true                     # Include Screenshot Support
 TW_DEFAULT_LANGUAGE := en                     # Set Default Language 
 TW_EXTRA_LANGUAGES := false
 TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
 TW_FORCE_USE_BUSYBOX := true
 
-TW_HAS_MTP := true
+#TW_HAS_MTP := true
 TW_INCLUDE_REPACKTOOLS := true
-TW_EXCLUDE_DEFAULT_USB_INIT := true
+#TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_DEFAULT_EXTERNAL_STORAGE := true
 TW_NO_USB_STORAGE := true
 
