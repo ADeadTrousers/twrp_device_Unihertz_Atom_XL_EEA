@@ -1,6 +1,6 @@
 import /init.vendor.trustkernel.rc
 import /vendor/etc/init/trustkernel.rc
-#import /vendor/etc/init/android.hardware.gatekeeper@1.0-service.rc
+import /vendor/etc/init/android.hardware.gatekeeper@1.0-service.rc
 import /vendor/etc/init/android.hardware.keymaster@4.0-service.trustkernel.rc
 import /vendor/etc/init/vendor.mediatek.hardware.keymaster_attestation@1.1-service.rc
 
@@ -26,7 +26,7 @@ on fs
     # Create a more standard /dev/block layout for our scripts
     symlink /dev/block/platform/bootdevice /dev/block/bootdevice
     export ANDROID_ROOT /system_root
-    
+        
 on post-fs
     # Support A/B feature for EMMC and UFS boot region
     symlink /dev/block/sda /dev/block/mmcblk0boot0
@@ -57,5 +57,6 @@ on property:sys.usb.ffs.ready=1
     write /config/usb_gadget/g1/UDC "musb-hdrc"
 
 on late-fs
+    start vendor.gatekeeper-1-0
     start vendor.keymaster-4-0-trustkernel
     start keymaster_attestation-1-1
